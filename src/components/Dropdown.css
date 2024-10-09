@@ -1,0 +1,36 @@
+.dropdown {
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+}
+
+.dropdown-label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.dropdown-select {
+    appearance: none; /* Eliminamos la flecha nativa del navegador */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+    cursor: pointer;
+}
+
+.dropdown-select:hover {
+    border-color: #999;
+}
+
+.dropdown-option {
+    padding: 5px;
+}

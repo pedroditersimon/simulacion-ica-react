@@ -18,8 +18,8 @@ export default function ICAGraph({ ICA_series, title, categories, type="line", c
       chart.zoomX();
       return;
     }
-
-    chart.zoomX(focusX-1, focusX+3);
+    const minFocusX = Math.max(focusX - 1, 1);
+    chart.zoomX(minFocusX, minFocusX+4);
   }
 
   const state = {

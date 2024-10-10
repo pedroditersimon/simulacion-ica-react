@@ -57,7 +57,7 @@ export default function App(props) {
   return (
     <div>
       <div className='header'>
-        <h3>Distribuciones</h3>
+        <h3>Simulación del ICA a lo largo del dia</h3>
         <Dropdown options={getLabels("No filtrar")} onSelect={onDropdownSelect} />
         <Button label="Regenerar" onClick={regenerateValues} />
       </div>

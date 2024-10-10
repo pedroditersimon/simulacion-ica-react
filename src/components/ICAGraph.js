@@ -1,7 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Chart from 'react-apexcharts';
 
-export default function ICAGraph({ ICA_series, title, categories, type="line", colors=["#008FFB"] }) {
+export default function ICAGraph({ ICA_series, title, categories, type="line", colors=["#008FFB"], maxY, focusX }) {
+  const chartRef = useRef(null);
+
+  useEffect(() => setFoux(focusX), [focusX]);
+  useEffect(() => {
+    if (focusX !== undefined && focusX >= 0) setFoux(focusX);
+  }, [ICA_series]);
+
+  function setFoux(focusX) {
+    const chart = chartRef.current.chart;
+    if (!chart) return;
+
+    if (focusX === undefined || focusX < 0)
+    {
+      chart.zoomX();
+      return;
+    }
+
+    chart.zoomX(focusX-1, focusX+3);
+  }
 
   const state = {
     options: {
@@ -10,6 +29,10 @@ export default function ICAGraph({ ICA_series, title, categories, type="line", c
       },
       xaxis: {
         categories: categories,
+      },
+      yaxis: {
+        min: 0,
+        max: maxY
       },
       stroke: {
         curve: 'monotoneCubic'
@@ -25,7 +48,7 @@ export default function ICAGraph({ ICA_series, title, categories, type="line", c
         size: 1
       },
       legend: {
-        show: false
+        show: true
       },
       dataLabels: {
         enabled: false
@@ -39,7 +62,8 @@ export default function ICAGraph({ ICA_series, title, categories, type="line", c
       options={state.options}
       series={state.series}
       type={type}
-      height={200}
+      height={180}
+      ref={chartRef}
     />
   );
 }
